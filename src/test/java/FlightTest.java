@@ -1,9 +1,11 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class FlightTest {
     Flight flight;
@@ -35,6 +37,7 @@ public class FlightTest {
         flight.addPassenger(passenger1);
         assertEquals(4, flight.getPassengers());
         assertEquals(0, flight.availableSeats());
+        assertEquals(4, flight.getBookedSeats());
     }
 
     @Test
@@ -46,5 +49,20 @@ public class FlightTest {
     public void canReturnAvailableSeats(){
         flight.addPassenger(passenger1);
         assertEquals(3, flight.availableSeats());
+    }
+
+    @Test
+    public void canGenerateUniqueSeatNumber(){
+        ArrayList<Integer> seats = new ArrayList<Integer>();
+        seats.add(flight.generateSeatNumber());
+        seats.add(flight.generateSeatNumber());
+        seats.add(flight.generateSeatNumber());
+        seats.add(flight.generateSeatNumber());
+        assertTrue(seats.contains(1));
+        assertTrue(seats.contains(2));
+        assertTrue(seats.contains(3));
+        assertTrue(seats.contains(4));
+
+
     }
 }
